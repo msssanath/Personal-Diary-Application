@@ -1,3 +1,4 @@
+package my;
 import java.util.*;
 import java.io.*;
 import java.text.DateFormat;
@@ -14,13 +15,13 @@ class FileStructure
   {
     this.name = name;
   }
-  public void getUserDetails()
+  public void getUserDetails(String title,String content)
   {
     this.time = getSystemTime();                  // will come from text field
-    System.out.println("Title: ");
-    this.title = in.nextLine();
-    System.out.println("Content: ");
-    this.content = in.nextLine();
+    //System.out.println("Title: ");
+    this.title = title;
+    //System.out.println("Content: ");
+    this.content = content;
   }
 
   public String getSystemTime()
@@ -133,15 +134,13 @@ class MasterFile
 {
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
-    String name;
-    while(true)
-    {
+    /*String name;
       System.out.println("Name: ");
       name = in.nextLine();
       FileStructure user = new FileStructure(name);
       user.getUserDetails();
       user.printUserDetails();
-      user.writeToMasterFile();
-    }
+      user.writeToMasterFile();*/
+    
   }
 }

@@ -68,7 +68,7 @@ public class Account {
         //return 0;
     }
     
-    void login(String username, String password) throws IOException
+    String login(String username, String password) throws IOException
     {
         try
         {
@@ -87,17 +87,18 @@ public class Account {
                 {
                     System.out.println("Found");
                     System.out.println(password);
-                    break;
+                    return b[0];
                     //return 1;
                 }
             }
-            //return 0;
+            
         }
         catch(IOException e)
         {
             System.out.println(e);
         }
         //return 0;
+        return "false";
     }
     
     public static void main(String args[]) throws IOException
@@ -105,7 +106,7 @@ public class Account {
         Account A = new Account();
         //int res = A.addAccount("pterdal", "cr7", "Pawan");
         
-        A.login("pterdal","cr7");
+       // A.login("pterdal","cr7");
         
     }
 }

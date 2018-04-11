@@ -6,6 +6,7 @@
 package my;
 import java.io.*;
 import java.util.Arrays;
+import javax.swing.*;
 /**
  *
  * @author Sanath
@@ -129,7 +130,7 @@ public class LoginForm extends javax.swing.JFrame {
             Account A = new Account();
             username = A.login(username, password);
             if(username.equals("false"))
-                System.out.println("wrong password");
+                JOptionPane.showMessageDialog(null,"wrong password");
             else
             {
                 this.dispose();

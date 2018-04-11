@@ -11,30 +11,6 @@ import java.io.*;
  * @author Sanath
  */
 public class Account {
-    /*String username;
-    String password;
-    String name;
-    String buffer = " ";
-    void pack()
-    {
-        buffer = username + "|" + password + "|" + name + "\n";
-    }
-    
-    void unpack()
-    {
-        String b[];
-        b = buffer.split("|");
-        username = b[0];
-        password = b[1];
-        name = b[2];
-    }
-    
-    public Account(String username, String password, String name)
-    {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-    }*/
     void addAccount(String username, String password, String name) throws IOException
     {
         try
@@ -69,7 +45,7 @@ public class Account {
         //return 0;
     }
     
-    void login(String username, String password) throws IOException
+    String login(String username, String password) throws IOException
     {
         try
         {
@@ -95,31 +71,30 @@ public class Account {
                         flag = 1;
                         System.out.println("Found");
                         System.out.println(Password);
-                        break;
+                        return user;
                         //return 1;
                     }
                 }
             }
             //System.out.println("After loop : ");
+            raf.close();
             if(flag == 0)
             {
                 System.out.println("Not found");
             }
-            raf.close();
+           
         }
         catch(IOException e)
         {
             System.out.println(e);
         }
         //return 0;
+        return "false";
     }
     
     public static void main(String args[]) throws IOException
     {
         Account A = new Account();
-        //int res = A.addAccount("pterdal", "cr7", "Pawan");
-        
-        //A.addAccount("sanath", "kumar", "Sanath");
         A.login("sanath","kumar");
     }
 }

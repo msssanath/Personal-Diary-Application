@@ -5,7 +5,7 @@
  */
 package my;
 import java.io.*;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author Sanath
@@ -162,19 +162,46 @@ public class RegisterForm extends javax.swing.JFrame {
         String name = jTextField1.getText();
         String username = jTextField2.getText();
         String password = jTextField3.getText();
-        
+        if(!checkIfUsernameExists(username))
+        {
+            try
+            {
+                //System.out.println(username + " " + password + " " + name);
+                Account A = new Account();
+                A.addAccount(username, password, name);
+            }
+            catch(IOException e)
+            {
+                System.out.println("Exception");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Sorry,this username already exists");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+    boolean checkIfUsernameExists(String username)
+    {
         try
         {
-            //System.out.println(username + " " + password + " " + name);
-            Account A = new Account();
-            A.addAccount(username, password, name);
+            RandomAccessFile fin = new RandomAccessFile("Accounts.txt","r");
+            String line,record[];
+            line = fin.readLine();
+            while(line != null)
+            {
+                record = line.split("\\|");
+                if(record[0].equals(username))
+                    return true;
+                line = fin.readLine();
+            }
         }
         catch(IOException e)
         {
-            System.out.println("Exception");
+            System.out.println("Error");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+        
+        return false;
+    }
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
 
     }//GEN-LAST:event_jTextField3ActionPerformed

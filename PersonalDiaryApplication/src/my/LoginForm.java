@@ -129,12 +129,13 @@ public class LoginForm extends javax.swing.JFrame {
         {
             Account A = new Account();
             username = A.login(username, password);
+            String name = A.getName(username);      //Get the name associated with the username
             if(username.equals("false"))
                 JOptionPane.showMessageDialog(null,"wrong password");
             else
             {
                 this.dispose();
-                new NewJFrame(username).setVisible(true);
+                new NewJFrame(username, name).setVisible(true);
             }
         }
         catch(IOException e)

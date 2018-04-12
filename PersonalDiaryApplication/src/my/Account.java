@@ -11,6 +11,7 @@ import java.io.*;
  * @author Sanath
  */
 public class Account {
+    
     void addAccount(String username, String password, String name) throws IOException
     {
         try
@@ -92,9 +93,41 @@ public class Account {
         return "false";
     }
     
+    public String getName(String username) throws IOException
+    {
+        try
+        {
+            RandomAccessFile raf = new RandomAccessFile("Accounts.txt","rw");
+            String line;
+            while(true)
+            {
+                line = raf.readLine();
+                if(line == null)
+                    break;
+                System.out.println(line);
+                String b[]; 
+                b =  line.split("\\|");
+                String user = b[0];
+                if(username.equals(user))
+                {
+                    String name = b[2];
+                    name = name.substring(0, name.length() - 1);    //To remove # from the end
+                    System.out.println(name);
+                    return name;
+                }  
+            }
+        }
+        catch(IOException e)
+        {
+            System.out.println("Exception");
+        }
+        return " ";
+    }
+    
     public static void main(String args[]) throws IOException
     {
         Account A = new Account();
         A.login("sanath","kumar");
+        A.getName("sanath");
     }
 }

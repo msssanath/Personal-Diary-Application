@@ -7,21 +7,42 @@ class FileStructure
   Scanner in = new Scanner(System.in);
 
   String name,time,title,content;                  // class variables
-
+  String keywords;
+  int count=0;                                     //no of records
   public static TreeMap<String,String> primaryIndexmap = new TreeMap<String,String>();    // buffer for primaryIndex
   public static TreeMap<String,String> secondaryIndexmap = new TreeMap<String,String>();  // buffer for secondaryIndex
 
   public FileStructure(String name)
   {
     this.name = name;
+    try
+    {
+        RandomAccessFile raf = new RandomAccessFile("MasterFile.txt", "rw");
+        String line;
+        while(true)                                 //to get the no of records
+        {
+            line = raf.readLine();
+            if(line == null)
+                break;
+            this.count++;                           
+            System.out.println(this.count);
+        }
+    }
+    catch(IOException e)
+    {
+        System.out.println("Exception");
+    }
+    
   }
-  public void getUserDetails(String title,String content)
+  public void getUserDetails(String title, String content, String keywords)
   {
     this.time = getSystemTime();                  // will come from text field
     //System.out.println("Title: ");
     this.title = title;
     //System.out.println("Content: ");
     this.content = content;
+    this.keywords = keywords;
+    System.out.println("Keywords : " + keywords);
   }
 
   public String getSystemTime()
@@ -46,8 +67,10 @@ class FileStructure
       RandomAccessFile fout = new RandomAccessFile("MasterFile.txt","rw");
       fout.seek(fout.length());
       long size = fout.getFilePointer();
-      fout.writeBytes(this.name+"|"+this.time+"|"+this.title+"|"+this.content+"\n");
-      writeToPrimaryIndexFile(this.name,size,this.time);
+      //count++;
+      this.name = this.name + count;        //Primary Key format
+      fout.writeBytes(this.name+"|"+this.time+"|"+this.title+"|"+this.content+"|"+this.keywords+"\n");
+      writeToPrimaryIndexFile(this.name,size);
       writeToSecondaryIndexFile(this.time,this.name);
       fout.close();
     }
@@ -59,7 +82,7 @@ class FileStructure
 
   //***************************** enter details in primary index file ************************//
 
-  public void writeToPrimaryIndexFile(String name,long offset,String date)
+  public void writeToPrimaryIndexFile(String name,long offset)
   {
     try
     {
@@ -133,7 +156,11 @@ class FileStructure
 class MasterFile
 {
   public static void main(String[] args) {
-    Scanner in = new Scanner(System.in);
+    //Scanner in = new Scanner(System.in);
+    FileStructure user = new FileStructure("Sha");
+    /*user.getUserDetails("Dead","Might die","Death,End");
+    user.printUserDetails();
+    user.writeToMasterFile();*/
     /*String name;
       System.out.println("Name: ");
       name = in.nextLine();

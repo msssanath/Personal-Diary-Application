@@ -9,9 +9,13 @@ class FileStructure
   String name,time,title,content;                  // class variables
   String keywords;
   int count=0;                                     //no of records
+<<<<<<< HEAD
   public static TreeMap<String,String> primaryIndexmap = new TreeMap<String,String>();    // buffer for primaryIndex
   public static TreeMap<String,String> secondaryIndexmap = new TreeMap<String,String>();  // buffer for secondaryIndex
   public static TreeMap<String, String> keywordIndexmap = new TreeMap<String,String>(); // buffer for secondary index with keywords
+=======
+  
+>>>>>>> 70b445de17b972ea07e9d98872890ebafd55d7e5
 
   public FileStructure(String name)
   {
@@ -67,6 +71,7 @@ class FileStructure
     {
       RandomAccessFile fout = new RandomAccessFile("MasterFile.txt","rw");
       fout.seek(fout.length());
+<<<<<<< HEAD
       long size = fout.getFilePointer();
       //count++;
       this.name = this.name + count;        //Primary Key format
@@ -74,6 +79,13 @@ class FileStructure
       writeToPrimaryIndexFile(this.name,size);
       writeToSecondaryIndexFile(this.time,this.name);
       writeToKeywordIndexFile(this.keywords,this.name);
+=======
+      long size = fout.getFilePointer();    
+             
+      fout.writeBytes(this.count+"|"+this.name+"|"+this.time+"|"+this.title+"|"+this.content+"|"+this.keywords+"\n");         //primary key format
+      writeToPrimaryIndexFile(String.valueOf(this.count),String.valueOf(size));
+      writeToSecondaryIndexFile(this.time,String.valueOf(this.count),this.name);
+>>>>>>> 70b445de17b972ea07e9d98872890ebafd55d7e5
       fout.close();
     }
     catch(IOException e)
@@ -84,20 +96,15 @@ class FileStructure
 
   //***************************** enter details in primary index file ************************//
 
-  public void writeToPrimaryIndexFile(String name,long offset)
+  public void writeToPrimaryIndexFile(String primaryKey,String offset)
   {
     try
     {
-      readIndexFileContents("primary",primaryIndexmap);            // for sorting it
-      System.out.println(primaryIndexmap);
-      primaryIndexmap.put(name,String.valueOf(offset));
+      
       RandomAccessFile fout = new RandomAccessFile("PrimaryIndexFile.txt","rw");
-      for(String i : primaryIndexmap.keySet())
-      {
-        fout.writeBytes(i+"|"+primaryIndexmap.get(i)+"\n");
-      }
+      fout.seek(fout.length());
+      fout.writeBytes(primaryKey+"|"+offset+"\n");
       fout.close();
-
     }
     catch(IOException e)
     {
@@ -105,6 +112,7 @@ class FileStructure
     }
   }
 
+<<<<<<< HEAD
   //***************************** load the buffer with values ************************//
   public void readIndexFileContents(String fileType,TreeMap<String,String> mapType)
   {
@@ -132,20 +140,17 @@ class FileStructure
       System.out.println("Error!");
     }
   }
+=======
+>>>>>>> 70b445de17b972ea07e9d98872890ebafd55d7e5
 
   //************************ write into secondary index file ***************//
-  public void writeToSecondaryIndexFile(String date,String name)
+  public void writeToSecondaryIndexFile(String date,String primaryKey,String name)
   {
     try
     {
-      readIndexFileContents("secondary",secondaryIndexmap);
-      System.out.println(secondaryIndexmap);
-      secondaryIndexmap.put(date,name);
       RandomAccessFile fout = new RandomAccessFile("SecondaryIndexFile.txt","rw");
-      for(String i : secondaryIndexmap.keySet())
-      {
-        fout.writeBytes(i+"|"+secondaryIndexmap.get(i)+"\n");
-      }
+      fout.seek(fout.length());
+      fout.writeBytes(date+"|"+primaryKey+"|"+name+"\n");
       fout.close();
 
     }
@@ -331,10 +336,14 @@ class FileStructure
 class MasterFile
 {
   public static void main(String[] args) {
+<<<<<<< HEAD
     //Scanner in = new Scanner(System.in);
     FileStructure user = new FileStructure("Sanath");
     //System.out.println(user.count);
     user.SearchByDate("4","12");
+=======
+    //FileStructure user = new FileStructure("Sha");
+>>>>>>> 70b445de17b972ea07e9d98872890ebafd55d7e5
     /*user.getUserDetails("Dead","Might die","Death,End");
     user.printUserDetails();
     user.writeToMasterFile();*/

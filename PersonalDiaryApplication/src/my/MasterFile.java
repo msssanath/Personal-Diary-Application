@@ -131,8 +131,6 @@ class FileStructure
   public void SearchByDate(String monthI, String dayI)
   {
       
-      String offsets[] = new String[this.count];
-      int j=0;
       String buffer[] = new String[this.count+1];
       int k=0;
       try
@@ -141,7 +139,7 @@ class FileStructure
           RandomAccessFile rab = new RandomAccessFile("PrimaryIndexFile.txt","rw");
           while(true)
           {
-              buffer[k] = rab.readLine();
+              buffer[k] = rab.readLine();       //store all records of primary index
               if(buffer[k] == null)
                   break;
               k++;
@@ -154,27 +152,88 @@ class FileStructure
               if(line == null)
                   break;
               String record[] = line.split("\\|");
-              String Date = record[0];
+              String Date = record[0];         //Assign Date, pk and name from secondary index
               String primaryKey = record[1];
               String nameF = record[2];
               if(nameF.equals(this.name))
               {
                   System.out.println(line);
-                  String date[] = Date.split(" ");
+                  String date[] = Date.split(" ");      //Assign day and month from Date
                   String MonthF = date[1];
                   String dayF = date[2];
-                  String monthF = assignNumbersToMonths(MonthF);
+                  String monthF = assignNumbersToMonths(MonthF);    //Eg:- Jan-->1 Feb-->2
                   if(monthI.equals(monthF) && dayI.equals(dayF))
                   {
-                      int pos = BinarySearchOnIndex(buffer, 0, this.count-1, primaryKey);
+                      int pos = BinarySearchOnIndex(buffer, 0, this.count-1, primaryKey); //Search buffer[] for the primary key
                       String pIndexRecord[] = buffer[pos].split("\\|");
-                      int offset = Integer.parseInt(pIndexRecord[1]);
-                      master.seek(offset);
+                      int offset = Integer.parseInt(pIndexRecord[1]);       //Get offset of the primary key
+                      master.seek(offset);                                  //Seek to the offset and print it
                       String entry = master.readLine();
                       System.out.println(entry);
                   }
               }
           }
+      }
+      catch(IOException e)
+      {
+          System.out.println("Exception");
+      }
+  }
+  //*********************Search By Keywords****************************************//
+  public void SearchByKeyword(String keyword)
+  {
+      String buffer[] = new String[this.count+1];
+      int k=0;
+      try
+      {
+          RandomAccessFile master = new RandomAccessFile("MasterFile.txt","rw");
+          RandomAccessFile pIndex = new RandomAccessFile("PrimaryIndexFile.txt","rw");
+          RandomAccessFile sIndex = new RandomAccessFile("KeywordIndexFile.txt","rw");
+          while(true)
+          {
+              buffer[k] = pIndex.readLine();
+              if(buffer[k] == null)
+                  break;
+              k++;
+          }
+          String line;
+          while(true)
+          {
+              line = sIndex.readLine();
+              if(line == null)
+                  break;
+              String record[] = line.split("\\|");
+              String allKeywords = record[0];
+              String primaryKey = record[1];
+              String nameF = record[2];
+              System.out.println(allKeywords);
+              StringTokenizer st = new StringTokenizer(allKeywords, ",");
+              int noOfKeywords = st.countTokens();
+              System.out.println(noOfKeywords);
+              String keywordsF[] = new String[noOfKeywords];
+              for(int i=0;i<noOfKeywords;i++)
+              {
+                  keywordsF[i] = st.nextToken();
+                  System.out.println(keywordsF[i]);
+              }
+              if(nameF.equals(this.name))
+              {
+                  for(int i=0;i<noOfKeywords;i++)
+                  {
+                      if(keyword.equals(keywordsF[i]))
+                      {
+                          int pos = BinarySearchOnIndex(buffer, 0, this.count-1, primaryKey); //Search buffer[] for the primary key
+                          String pIndexRecord[] = buffer[pos].split("\\|");
+                          int offset = Integer.parseInt(pIndexRecord[1]);       //Get offset of the primary key
+                          master.seek(offset);                                  //Seek to the offset and print it
+                          String entry = master.readLine();
+                          System.out.println(entry);
+                      }
+                  }
+              }
+              
+          }
+          
       }
       catch(IOException e)
       {
@@ -244,8 +303,9 @@ class MasterFile
     /*user.getUserDetails("Dead","Might die","Death,End");
     user.printUserDetails();
     user.writeToMasterFile();*/
-    FileStructure user = new FileStructure("Pawan");
-    user.SearchByDate("4", "14");
+    FileStructure user = new FileStructure("Sanath");
+    user.SearchByKeyword("Happy Meal");
+    //user.SearchByDate("4", "14");
     /*String name;
       System.out.println("Name: ");
       name = in.nextLine();

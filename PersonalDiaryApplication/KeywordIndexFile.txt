@@ -1,7 +1,5 @@
-Color|Sanath8
-ESCN|Sanath11
-Elon|Sanath10
-RCB|Sanath8
-Starman|Sanath10
-Tesla|Sanath9
-ViscaBarca|Sanath12
+ESCN|0|Sanath
+Barca,Messi|1|Sanath
+Jai|2|Pawan
+Rejected|3|Pawan
+MCD,Happy Meal|4|Sanath

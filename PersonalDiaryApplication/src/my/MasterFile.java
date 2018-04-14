@@ -68,6 +68,7 @@ class FileStructure
       fout.writeBytes(this.count+"|"+this.name+"|"+this.time+"|"+this.title+"|"+this.content+"|"+this.keywords+"\n");         //primary key format
       writeToPrimaryIndexFile(String.valueOf(this.count),String.valueOf(size));
       writeToSecondaryIndexFile(this.time,String.valueOf(this.count),this.name);
+      writeToKeywordIndexFile(this.keywords, String.valueOf(this.count), this.name);
       fout.close();
     }
     catch(IOException e)
@@ -111,7 +112,129 @@ class FileStructure
       System.out.println("Error!");
     }
   }
+  //******************************write into keyword index file*************************//
+    public void writeToKeywordIndexFile(String keywords, String primaryKey, String name)
+    {
+        try
+        {
+            RandomAccessFile fout = new RandomAccessFile("KeywordIndexFile.txt","rw");
+            fout.seek(fout.length());
+            fout.writeBytes(keywords+"|"+primaryKey+"|"+name+"\n");
+            fout.close();
+        }
+        catch(IOException e)
+        {
+            System.out.println("Exception");
+        }
+    }
+  //******************************Search By Date***************************************//
+  public void SearchByDate(String monthI, String dayI)
+  {
+      
+      String offsets[] = new String[this.count];
+      int j=0;
+      String buffer[] = new String[this.count+1];
+      int k=0;
+      try
+      {
+          RandomAccessFile master = new RandomAccessFile("MasterFile.txt","rw");
+          RandomAccessFile rab = new RandomAccessFile("PrimaryIndexFile.txt","rw");
+          while(true)
+          {
+              buffer[k] = rab.readLine();
+              if(buffer[k] == null)
+                  break;
+              k++;
+          }
+          RandomAccessFile raf = new RandomAccessFile("SecondaryIndexFile.txt","rw");
+          String line;
+          while(true)
+          {
+              line = raf.readLine();
+              if(line == null)
+                  break;
+              String record[] = line.split("\\|");
+              String Date = record[0];
+              String primaryKey = record[1];
+              String nameF = record[2];
+              if(nameF.equals(this.name))
+              {
+                  System.out.println(line);
+                  String date[] = Date.split(" ");
+                  String MonthF = date[1];
+                  String dayF = date[2];
+                  String monthF = assignNumbersToMonths(MonthF);
+                  if(monthI.equals(monthF) && dayI.equals(dayF))
+                  {
+                      int pos = BinarySearchOnIndex(buffer, 0, this.count-1, primaryKey);
+                      String pIndexRecord[] = buffer[pos].split("\\|");
+                      int offset = Integer.parseInt(pIndexRecord[1]);
+                      master.seek(offset);
+                      String entry = master.readLine();
+                      System.out.println(entry);
+                  }
+              }
+          }
+      }
+      catch(IOException e)
+      {
+          System.out.println("Exception");
+      }
+  }
+  //*****************Binary Search on Primary Index File***************************//
+  public int BinarySearchOnIndex(String buffer[], int low, int high, String key)
+  {
+      int flag = 0;
+      while(low<=high)
+      {
+        int mid = (low+high)/2;
+        String record[] = buffer[mid].split("\\|");
+        String primaryKey = record[0];
+        if(key.equals(primaryKey))
+        {
+            flag = 1;
+            return mid;
+        }
+        else if(key.compareTo(primaryKey) < 0)
+            high = mid-1;
+        else
+            low = mid+1;
+      }
+      return -1;
+  }
+    //****************Assign Numbers to Months.Jan-->1 etc*************************//
+    public String assignNumbersToMonths(String MonthF)
+    {
+        String monthf = "";
+        if(MonthF.equals("Jan"))
+            monthf = "1";
+        else if(MonthF.equals("Feb"))
+            monthf = "2";
+        else if(MonthF.equals("Mar"))
+            monthf = "3";
+        else if(MonthF.equals("Apr"))
+            monthf = "4";
+        else if(MonthF.equals("May"))
+            monthf = "5";
+        else if(MonthF.equals("Jun"))
+            monthf = "6";
+        else if(MonthF.equals("July"))
+            monthf = "7";
+        else if(MonthF.equals("Aug"))
+            monthf = "8";
+        else if(MonthF.equals("Sept"))
+            monthf = "9";
+        else if(MonthF.equals("Oct"))
+            monthf = "10";
+        else if(MonthF.equals("Nov"))
+            monthf = "11";
+        else if(MonthF.equals("Dec"))
+            monthf = "12";
+        return monthf;
+    }
 }
+
+
 
 //***************************************** main *************************************//
 class MasterFile
@@ -121,6 +244,8 @@ class MasterFile
     /*user.getUserDetails("Dead","Might die","Death,End");
     user.printUserDetails();
     user.writeToMasterFile();*/
+    FileStructure user = new FileStructure("Pawan");
+    user.SearchByDate("4", "14");
     /*String name;
       System.out.println("Name: ");
       name = in.nextLine();

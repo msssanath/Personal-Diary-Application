@@ -1,0 +1,7 @@
+Color|Sanath8
+ESCN|Sanath11
+Elon|Sanath10
+RCB|Sanath8
+Starman|Sanath10
+Tesla|Sanath9
+ViscaBarca|Sanath12

@@ -4,3 +4,10 @@ Sanath2|Thu Apr 12 20:03:48 IST 2018|Fav song|Apollo - We're the lucky ones|EDM,
 Sanath3|Thu Apr 12 20:07:55 IST 2018|Fav hindi song|Galti se mistake|Bollywood,Pritam
 Pawan4|Thu Apr 12 20:17:06 IST 2018|Fav food|Idly Vada|Food
 Sanath5|Thu Apr 12 20:28:14 IST 2018|Fav Singer|J Balvin - The Papi|Latino,Pop
+Pawan6|Thu Apr 12 21:44:30 IST 2018|Fav Song|Rockabye - Anne Marie|EDM,Pop
+Pawan7|Thu Apr 12 21:46:01 IST 2018|Fav Song|Udd Gaye - AIB|Hindi,EDM
+Sanath8|Thu Apr 12 21:50:45 IST 2018|Fav Color|Bleed Red|Color,RCB
+Sanath9|Thu Apr 12 21:53:13 IST 2018|Fav Company|Tesla,SpaceX and Hyperloop|Tesla,Elon
+Sanath10|Thu Apr 12 21:53:54 IST 2018|Fav Company|Tesla,SpaceX and Paypal|Starman,Elon
+Sanath11|Sat Apr 14 12:07:02 IST 2018|First Win|We won yesterday!!|ESCN
+Sanath12|Sat Apr 14 12:07:46 IST 2018|FCBvsVAL|Today La liga match|ViscaBarca

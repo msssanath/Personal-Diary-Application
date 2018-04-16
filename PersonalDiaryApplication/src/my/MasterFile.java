@@ -31,6 +31,10 @@ class FileStructure
     }
     
   }
+  public FileStructure()
+  {
+      
+  }
   public void getUserDetails(String title, String content, String keywords)
   {
     this.time = getSystemTime();                  // will come from text field
@@ -128,10 +132,11 @@ class FileStructure
         }
     }
   //******************************Search By Date***************************************//
-  public void SearchByDate(String monthI, String dayI)
+  public String SearchByDate(String monthI, String dayI)
   {
       
       String buffer[] = new String[this.count+1];
+      String entry="";
       int k=0;
       try
       {
@@ -168,8 +173,12 @@ class FileStructure
                       String pIndexRecord[] = buffer[pos].split("\\|");
                       int offset = Integer.parseInt(pIndexRecord[1]);       //Get offset of the primary key
                       master.seek(offset);                                  //Seek to the offset and print it
-                      String entry = master.readLine();
+                      entry = entry.concat(master.readLine()+"\n");
                       System.out.println(entry);
+                  }
+                  if(entry.length() == 0)
+                  {
+                      return "no entry on that day from you";
                   }
               }
           }
@@ -178,6 +187,8 @@ class FileStructure
       {
           System.out.println("Exception");
       }
+      
+      return entry;
   }
   //*********************Search By Keywords****************************************//
   public void SearchByKeyword(String keyword)
@@ -266,23 +277,23 @@ class FileStructure
     {
         String monthf = "";
         if(MonthF.equals("Jan"))
-            monthf = "1";
+            monthf = "01";
         else if(MonthF.equals("Feb"))
-            monthf = "2";
+            monthf = "02";
         else if(MonthF.equals("Mar"))
-            monthf = "3";
+            monthf = "03";
         else if(MonthF.equals("Apr"))
-            monthf = "4";
+            monthf = "04";
         else if(MonthF.equals("May"))
-            monthf = "5";
+            monthf = "05";
         else if(MonthF.equals("Jun"))
-            monthf = "6";
+            monthf = "06";
         else if(MonthF.equals("July"))
-            monthf = "7";
+            monthf = "07";
         else if(MonthF.equals("Aug"))
-            monthf = "8";
+            monthf = "08";
         else if(MonthF.equals("Sept"))
-            monthf = "9";
+            monthf = "09";
         else if(MonthF.equals("Oct"))
             monthf = "10";
         else if(MonthF.equals("Nov"))

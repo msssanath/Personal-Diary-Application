@@ -135,7 +135,7 @@ public class LoginForm extends javax.swing.JFrame {
             else
             {
                 this.dispose();
-                new NewJFrame(username, name).setVisible(true);
+                new AfterLogin(username, name).setVisible(true);
             }
         }
         catch(IOException e)

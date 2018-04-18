@@ -20,6 +20,7 @@ public class SearchByKeywords extends javax.swing.JFrame {
         initComponents();
         this.name = name;
         this.username = username;
+        this.setLocationRelativeTo(null);
     }
 
     private SearchByKeywords() {

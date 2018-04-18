@@ -21,6 +21,7 @@ public class NewJFrame extends javax.swing.JFrame {
         this.name = name;
         this.username = username;
         //jLabel5.setText("logged in as: "+username);
+        this.setLocationRelativeTo(null);
     }
     private NewJFrame() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -1,7 +1,6 @@
 package my;
 import java.util.*;
 import java.io.*;
-import java.text.DateFormat;
 class FileStructure
 {
   Scanner in = new Scanner(System.in);
@@ -265,17 +264,20 @@ class FileStructure
   public int BinarySearchOnIndex(String buffer[], int low, int high, String key)
   {
       int flag = 0;
+      int iKey = Integer.parseInt(key);
       while(low<=high)
       {
         int mid = (low+high)/2;
         String record[] = buffer[mid].split("\\|");
         String primaryKey = record[0];
-        if(key.equals(primaryKey))
+        System.out.println("Low : " + low + "\t" + "High : " + high);
+        int pKey = Integer.parseInt(primaryKey);
+        if(iKey == pKey)
         {
             flag = 1;
             return mid;
         }
-        else if(key.compareTo(primaryKey) < 0)
+        else if(iKey < pKey)
             high = mid-1;
         else
             low = mid+1;

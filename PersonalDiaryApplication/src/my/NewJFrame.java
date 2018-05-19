@@ -53,11 +53,13 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(java.awt.Color.lightGray);
+        jPanel1.setBackground(new java.awt.Color(36, 47, 65));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setText("Title");
 
+        jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setText("Content");
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -66,8 +68,10 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setText("Keywords");
 
+        jButton1.setBackground(new java.awt.Color(97, 212, 195));
         jButton1.setText("Add Entry");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +79,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(97, 212, 195));
         jButton2.setText("Clear");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +87,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(97, 212, 195));
         jButton3.setText("Logout");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +95,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(97, 212, 195));
         jButton4.setText("Back");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -99,7 +99,7 @@ class FileStructure
   }
 
 
-  //************************ write into secondary index file ***************//
+  //************************ write into Secondary index file indexed by Date ***************//
   public void writeToSecondaryIndexFile(String date,String primaryKey,String name)
   {
     try
@@ -115,7 +115,7 @@ class FileStructure
       System.out.println("Error!");
     }
   }
-  //******************************write into keyword index file*************************//
+  //*************************write into Secondary index file indexed by Keywords*************************//
     public void writeToKeywordIndexFile(String keywords, String primaryKey, String name)
     {
         try

@@ -58,8 +58,10 @@ public class AfterLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(36, 47, 65));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jButton1.setBackground(new java.awt.Color(97, 212, 195));
         jButton1.setText("Add Entry");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +69,7 @@ public class AfterLogin extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(97, 212, 195));
         jButton2.setText("Search By Date");
         jButton2.setToolTipText("");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -75,12 +78,15 @@ public class AfterLogin extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setBackground(new java.awt.Color(97, 212, 195));
         jButton5.setText("Search By Keyword");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
+
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
